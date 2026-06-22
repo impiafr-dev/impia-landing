@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IMPIA — Vos impôts. Remplis. Sans vous.</title>
+  <meta name="description" content="Uploadez vos documents. Notre IA française remplit votre déclaration. Vous signez en 5 minutes."/>
+  <meta property="og:title" content="IMPIA — Vos impôts. Remplis. Sans vous."/>
+  <meta property="og:description" content="Uploadez vos documents. Notre IA française remplit votre déclaration. Vous signez en 5 minutes."/>
+  <meta property="og:url" content="https://impia.fr"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="IMPIA"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="IMPIA — Vos impôts. Remplis. Sans vous."/>
+  <meta name="twitter:description" content="Uploadez vos documents. Notre IA française remplit votre déclaration. Vous signez en 5 minutes."/>
+  <meta property="og:image" content="https://i.imgur.com/T5INIxY.png"/>
+  <meta name="twitter:image" content="https://i.imgur.com/T5INIxY.png"/>
+  <meta name="twitter:site" content="@notsoseriousamr"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --violet: #6C3BFF;
+      --violet-light: #8B5FFF;
+      --violet-dim: rgba(108,59,255,0.12);
+      --black: #0A0A0A;
+      --surface: #111111;
+      --surface2: #181818;
+      --border: rgba(255,255,255,0.07);
+      --text: #F0F0F0;
+      --muted: #777;
+      --green: #1DB87A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+    .logo span { color: var(--violet); }
+
+    .nav-badge {
+      font-size: 11px;
+      color: var(--violet-light);
+      background: var(--violet-dim);
+      border: 1px solid rgba(108,59,255,0.25);
+      padding: 5px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 100px 24px 80px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--violet);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+
+    /* FORM */
+    .form-wrap {
+      display: flex;
+      gap: 8px;
+      max-width: 420px;
+      margin: 0 auto 14px;
+    }
+
+    .form-wrap input {
+      flex: 1;
+      padding: 13px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-wrap input:focus { border-color: var(--violet); }
+    .form-wrap input::placeholder { color: #444; }
+
+    .btn {
+      padding: 13px 24px;
+      background: var(--violet);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn:hover { background: var(--violet-light); }
+    .btn:active { transform: scale(0.98); }
+
+    .form-note {
+      font-size: 12px;
+      color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .dot-green {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* TRUST PILLS */
+    .pills {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+    .pill {
+      font-size: 12px;
+      color: #555;
+      border: 1px solid #1E1E1E;
+      background: #111;
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 40px;
+    }
+
+    /* PROBLEM SECTION */
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      color: var(--violet);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 600;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    /* QUOTE */
+    .quote-block {
+      margin: 0 40px;
+      padding: 32px 36px;
+      background: var(--surface);
+      border-left: 2px solid var(--violet);
+    }
+    .quote-block p {
+      font-size: 20px;
+      font-style: italic;
+      color: #ccc;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    .quote-block span {
+      font-size: 13px;
+      color: var(--violet);
+    }
+
+    /* HOW IT WORKS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-top: 48px;
+    }
+
+    .step {
+      background: var(--surface);
+      padding: 28px 24px;
+      transition: background 0.2s;
+    }
+    .step:hover { background: var(--surface2); }
+
+    .step-num {
+      font-size: 11px;
+      color: var(--violet);
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+    .step-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* PRICING TEASER */
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 36px;
+      max-width: 480px;
+      margin: 48px auto 0;
+      text-align: center;
+    }
+    .pricing-tag {
+      display: inline-block;
+      font-size: 11px;
+      color: var(--green);
+      background: rgba(29,184,122,0.1);
+      border: 1px solid rgba(29,184,122,0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .pricing-price {
+      font-size: 48px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -2px;
+      margin-bottom: 4px;
+    }
+    .pricing-price sup {
+      font-size: 22px;
+      letter-spacing: 0;
+      color: var(--muted);
+      vertical-align: super;
+    }
+    .pricing-price sub {
+      font-size: 16px;
+      letter-spacing: 0;
+      color: var(--muted);
+    }
+    .pricing-desc {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+    .pricing-features li {
+      font-size: 14px;
+      color: #aaa;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--violet);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer span { font-size: 12px; color: #333; }
+    .footer-logo { font-size: 14px; font-weight: 600; color: #fff; }
+    .footer-logo span { color: var(--violet); }
+
+    /* SUCCESS STATE */
+    .success-msg {
+      display: none;
+      font-size: 14px;
+      color: var(--green);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .form-wrap { flex-direction: column; }
+      .steps { grid-template-columns: 1fr; }
+      .divider, .quote-block { margin: 0 20px; }
+      footer { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">Imp<span>ia</span></span>
+  <span class="nav-badge">Lancement bientôt</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Déclaration d'impôts automatique</div>
+  <h1>Vos impôts.<br><em>Remplis.</em> Sans vous.</h1>
+  <p class="hero-sub">
+    Vous fournissez vos documents. Notre IA française s'occupe du reste.
+    Aucune case à remplir. Aucune prise de tête.
+  </p>
+
+  <iframe data-tally-src="https://tally.so/embed/LZVYGO?alignLeft=0&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="180" frameborder="0" marginheight="0" marginwidth="0" title="Waitlist IMPIA" style="max-width:420px;margin:0 auto;display:block;"></iframe>
+  <p class="form-note" style="margin-top:8px;">
+    <span class="dot-green"></span>
+    IA 100% française &nbsp;·&nbsp; Données hébergées en Europe &nbsp;·&nbsp; RGPD
+  </p>
+
+  <div class="pills">
+    <span class="pill">Familles</span>
+    <span class="pill">Jeunes actifs</span>
+    <span class="pill">Seniors</span>
+    <span class="pill">Indépendants</span>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- QUOTE -->
+<div class="quote-block" style="margin-top: 80px;">
+  <p>"Les impôts c'est obligatoire. La galère, non."</p>
+  <span>— impia</span>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="section-label">Comment ça marche</div>
+  <h2 class="section-title">Trois étapes.<br>C'est tout.</h2>
+  <p class="section-sub">Pas de formation, pas de comptable, pas de stress. Juste vos documents et cinq minutes.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Vous uploadez</div>
+      <div class="step-desc">Avis de salaire, relevés bancaires, justificatifs — on accepte tout.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">On remplit</div>
+      <div class="step-desc">Notre IA (100% française, hébergée en Europe) extrait et complète votre déclaration.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Vous signez</div>
+      <div class="step-desc">Vous vérifiez en un coup d'œil. Vous validez. C'est envoyé.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PRICING TEASER -->
+<section class="section" style="text-align:center;">
+  <div class="section-label">Tarif</div>
+  <h2 class="section-title">Simple comme<br>votre déclaration.</h2>
+
+  <div class="pricing-card">
+    <span class="pricing-tag">Paiement unique annuel</span>
+    <div class="pricing-price"><sup>€</sup>19<sub>/an</sub></div>
+    <p class="pricing-desc">Une fois par an. Pas d'abonnement. Pas de surprise.</p>
+    <ul class="pricing-features">
+      <li>Déclaration complète automatisée</li>
+      <li>IA entraînée sur la fiscalité française</li>
+      <li>Données chiffrées et hébergées en Europe</li>
+      <li>Accès à toutes les futures mises à jour</li>
+    </ul>
+    <button class="btn" style="width:100%" onclick="document.getElementById('emailInput').focus()">
+      Être notifié au lancement
+    </button>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Imp<span>ia</span></span>
+  <span>Paris, France &nbsp;·&nbsp; IA 100% française</span>
+  <span>Données hébergées en Europe 🇪🇺</span>
+</footer>
+
+<script src="https://tally.so/widgets/embed.js"></script>
+
+</body>
+</html>
