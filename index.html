@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IMPIA · La déclaration d'impôts des auto-entrepreneurs, remplie par l'IA</title>
-  <meta name="description" content="IMPIA transforme vos factures, relevés et attestations en déclaration 2042-C-PRO pré-remplie. IA souveraine Mistral, hébergée en Europe. Pensé pour les auto-entrepreneurs et freelances (BIC / BNC)."/>
+  <title>IMPIA · Votre 2042-C-PRO de micro-entrepreneur, sans erreur de case</title>
+  <meta name="description" content="IMPIA (en préparation, bêta privée début 2027) calcule votre chiffre d'affaires encaissé à partir de vos factures, relevés et documents URSSAF, indique la bonne case de la 2042-C-PRO et signale les incohérences. Pour les micro-entrepreneurs (BIC / BNC)."/>
   <meta name="theme-color" content="#080808"/>
   <link rel="canonical" href="https://impia.fr/"/>
 
   <!-- Open Graph -->
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://impia.fr/"/>
-  <meta property="og:title" content="IMPIA · La déclaration des auto-entrepreneurs, remplie par l'IA"/>
-  <meta property="og:description" content="Upload. L'IA remplit. Vous signez. La déclaration des auto-entrepreneurs, propulsée par Mistral, hébergée en Europe."/>
+  <meta property="og:title" content="IMPIA · Votre 2042-C-PRO, sans erreur de case"/>
+  <meta property="og:description" content="Bêta privée début 2027. IMPIA vérifie votre déclaration de micro-entrepreneur case par case, avec Mistral AI."/>
   <meta property="og:locale" content="fr_FR"/>
 
   <!-- Favicon : monogramme violet, inline (zéro requête externe) -->
@@ -227,11 +227,10 @@
       <a href="/" class="logo" aria-label="IMPIA, accueil">Imp<em>ia</em></a>
       <div class="nav__links">
         <a href="#fonctionnement" class="nav__link">Comment ça marche</a>
-        <a href="#extraction" class="nav__link">Ce qu'on remplit</a>
-        <a href="#tarif" class="nav__link">Tarif</a>
+        <a href="#extraction" class="nav__link">Les cases</a>
+        <a href="#erreurs" class="nav__link">Erreurs repérées</a>
         <div class="nav__cta">
-          <a href="#liste" class="nav__link">Connexion</a>
-          <a href="#liste" class="btn btn--primary btn--sm">Commencer</a>
+          <a href="#liste" class="btn btn--primary btn--sm">Rejoindre la liste</a>
         </div>
       </div>
     </div>
@@ -242,11 +241,11 @@
     <header class="hero">
       <div class="container hero__grid">
         <div class="hero__copy" data-reveal>
-          <span class="badge badge--accent">IA souveraine française · Mistral</span>
-          <h1 class="t-display hero__title">Upload. L'IA remplit. Vous signez.</h1>
-          <p class="t-lg hero__sub">Factures, relevés, attestations. L'IA lit, trie et pré-remplit chaque case BIC / BNC. Vous vérifiez, vous envoyez.</p>
+          <span class="badge badge--accent">En préparation · bêta privée début 2027 · Mistral AI</span>
+          <h1 class="t-display hero__title">Votre 2042-C-PRO, sans erreur de case.</h1>
+          <p class="t-lg hero__sub">Déposez vos factures, relevés et attestations URSSAF. IMPIA calcule votre chiffre d'affaires encaissé, indique la bonne case et signale les incohérences. Vous vérifiez et vous déclarez vous-même sur impots.gouv.fr.</p>
           <div class="hero__cta">
-            <a href="#liste" class="btn btn--primary btn--lg">Commencer</a>
+            <a href="#liste" class="btn btn--primary btn--lg">Rejoindre la liste</a>
             <a href="#fonctionnement" class="btn btn--secondary btn--lg">Voir le fonctionnement</a>
           </div>
         </div>
@@ -257,22 +256,21 @@
             <div class="card scene__panel">
               <div class="row-between scene__hd">
                 <span class="t-sm c-2">Vos documents</span>
-                <span class="badge badge--muted">4 fichiers</span>
+                <span class="badge badge--muted">3 fichiers</span>
               </div>
-              <div class="doc"><svg aria-hidden="true" focusable="false" class="ico doc__ico"><use href="#i-receipt"/></svg><span class="doc__name">Factures_clients_2024.pdf</span><span class="doc__meta">312 Ko</span></div>
-              <div class="doc"><svg aria-hidden="true" focusable="false" class="ico doc__ico"><use href="#i-bank"/></svg><span class="doc__name">Releve_Qonto_annuel.pdf</span><span class="doc__meta">1,1 Mo</span></div>
-              <div class="doc"><svg aria-hidden="true" focusable="false" class="ico doc__ico"><use href="#i-doc"/></svg><span class="doc__name">Attestation_URSSAF.pdf</span><span class="doc__meta">88 Ko</span></div>
-              <div class="doc"><svg aria-hidden="true" focusable="false" class="ico doc__ico"><use href="#i-doc"/></svg><span class="doc__name">Avis_acompte_PAS.pdf</span><span class="doc__meta">104 Ko</span></div>
+              <div class="doc"><svg aria-hidden="true" focusable="false" class="ico doc__ico"><use href="#i-receipt"/></svg><span class="doc__name">Factures_clients_2026.pdf</span><span class="doc__meta">312 Ko</span></div>
+              <div class="doc"><svg aria-hidden="true" focusable="false" class="ico doc__ico"><use href="#i-bank"/></svg><span class="doc__name">Releve_pro_2026.pdf</span><span class="doc__meta">1,1 Mo</span></div>
+              <div class="doc"><svg aria-hidden="true" focusable="false" class="ico doc__ico"><use href="#i-doc"/></svg><span class="doc__name">Attestation_fiscale_URSSAF.pdf</span><span class="doc__meta">88 Ko</span></div>
             </div>
             <div class="scene__arrow"><span><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-arrow-down"/></svg></span></div>
             <div class="card scene__panel scene__panel--out">
               <div class="row-between scene__hd">
                 <span class="t-sm c-2">2042-C-PRO</span>
-                <span class="badge badge--success">Confiance 96 %</span>
+                <span class="badge badge--muted">Exemple fictif</span>
               </div>
               <div class="box"><span class="box__code">5KO</span><span class="box__label">Ventes micro-BIC</span><span class="box__val">18 400 €</span></div>
               <div class="box"><span class="box__code">5KP</span><span class="box__label">Prestations de services</span><span class="box__val">6 900 €</span></div>
-              <span class="t-xs c-muted scene__note">Exemple. Vous validez chaque case avant de la reporter.</span>
+              <span class="t-xs c-muted scene__note">Exemple fictif. Vous vérifiez chaque montant avant de le reporter vous-même.</span>
             </div>
           </div>
         </div>
@@ -280,13 +278,12 @@
     </header>
 
     <!-- ════════════════════ BANDEAU CONFIANCE ════════════════════ -->
-    <section aria-label="Traitement des données">
+    <section aria-label="Engagements prévus pour le lancement">
       <div class="container">
         <div class="trust" data-reveal>
-          <span class="trust__item"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-shield"/></svg>Propulsé par Mistral AI, en France</span>
-          <span class="trust__item"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-globe"/></svg>Hébergé en Europe</span>
-          <span class="trust__item"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-lock"/></svg>Conforme RGPD</span>
-          <span class="trust__item"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-trash"/></svg>PDF supprimés après analyse</span>
+          <span class="trust__item"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-shield"/></svg>Conçu avec Mistral AI (France)</span>
+          <span class="trust__item"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-globe"/></svg>Prévu : hébergement en Europe</span>
+          <span class="trust__item"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-trash"/></svg>Prévu : PDF supprimés après analyse</span>
         </div>
       </div>
     </section>
@@ -296,18 +293,15 @@
       <div class="container problem__grid">
         <div data-reveal>
           <h2 class="t-h2">Vous ne gagnez pas d'argent à chercher dans quelle case va quoi.</h2>
-          <p class="section__lead">Chaque printemps, la même corvée : un dossier de PDF en vrac, des montants à recopier, et le doute permanent sur la bonne ligne du 2042-C-PRO. IMPIA fait ce tri à votre place.</p>
-          <p class="t-sm problem__note">Micro-BIC, micro-BNC, versement libératoire, frais réels. IMPIA connaît les régimes des indépendants.</p>
+          <p class="section__lead">Chaque printemps, la même corvée : un dossier de PDF en vrac, des montants à recopier, et le doute permanent sur la bonne ligne du 2042-C-PRO. IMPIA fait le tri avec vous et vous montre d'où vient chaque montant.</p>
+          <p class="t-sm problem__note">Micro-BIC, micro-BNC, versement libératoire : IMPIA applique les règles de la déclaration des micro-entrepreneurs.</p>
         </div>
         <div class="chipwrap" data-reveal>
           <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-receipt"/></svg>Factures clients</span>
+          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-receipt"/></svg>Avoirs</span>
           <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-bank"/></svg>Relevés bancaires pro</span>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-doc"/></svg>Attestation URSSAF</span>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-doc"/></svg>Avis d'acompte PAS</span>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-doc"/></svg>Justificatifs de frais</span>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-doc"/></svg>Avis de CFE</span>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-receipt"/></svg>Notes de vente</span>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-bank"/></svg>Relevé d'honoraires</span>
+          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-doc"/></svg>Attestation fiscale URSSAF</span>
+          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-doc"/></svg>Récapitulatifs URSSAF</span>
         </div>
       </div>
     </section>
@@ -317,23 +311,23 @@
       <div class="container">
         <div class="section__head" data-reveal>
           <h2 class="t-h2">Comment ça marche</h2>
-          <p class="section__lead">Trois étapes, une vingtaine de secondes.</p>
+          <p class="section__lead">Trois étapes.</p>
         </div>
         <div class="steps">
           <div class="step" data-reveal>
             <div class="step__n">01</div>
             <div class="step__title"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-upload"/></svg>Importez</div>
-            <p class="step__desc">Glissez vos PDF. Factures, relevés, attestations, sans classement préalable.</p>
+            <p class="step__desc">Glissez vos PDF : factures, avoirs, relevés bancaires, documents URSSAF, sans classement préalable.</p>
           </div>
           <div class="step" data-reveal>
             <div class="step__n">02</div>
             <div class="step__title"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-cpu"/></svg>L'IA lit et trie</div>
-            <p class="step__desc">Mistral extrait chaque montant et le rattache à la bonne case du 2042 et du 2042-C-PRO.</p>
+            <p class="step__desc">IMPIA calcule le chiffre d'affaires encaissé de l'année, hors TVA, par catégorie, et vérifie qu'il correspond à vos déclarations URSSAF.</p>
           </div>
           <div class="step" data-reveal>
             <div class="step__n">03</div>
-            <div class="step__title"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-file-check"/></svg>Déclaration prête</div>
-            <p class="step__desc">Vérifiez le récapitulatif, téléchargez le PDF, reportez sur impots.gouv.fr.</p>
+            <div class="step__title"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-file-check"/></svg>Récapitulatif à vérifier</div>
+            <p class="step__desc">Chaque montant renvoie au document d'origine. Vous vérifiez, puis vous déclarez vous-même sur impots.gouv.fr.</p>
           </div>
         </div>
       </div>
@@ -343,28 +337,27 @@
     <section class="section" id="extraction">
       <div class="container">
         <div class="section__head" data-reveal>
-          <h2 class="t-h2">Ce qu'on lit, ce qu'on remplit.</h2>
-          <p class="section__lead">Vos documents entrent en vrac. Les bonnes cases fiscales sortent, prêtes à reporter.</p>
+          <h2 class="t-h2">Ce qu'on lit, ce qu'on calcule.</h2>
+          <p class="section__lead">Vos documents entrent en vrac. Vous obtenez les montants à reporter, case par case, avec leur justification.</p>
         </div>
         <div class="io">
           <div class="card io__col" data-reveal>
             <div class="io__cap"><svg aria-hidden="true" focusable="false" class="ico ico--lg c-2"><use href="#i-upload"/></svg><span class="card__title">Vos documents</span></div>
             <div class="io__list">
-              <div class="io__row"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg><span class="io__row-txt">Factures et notes de vente</span></div>
+              <div class="io__row"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg><span class="io__row-txt">Factures et avoirs</span></div>
               <div class="io__row"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg><span class="io__row-txt">Relevés bancaires professionnels</span></div>
-              <div class="io__row"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg><span class="io__row-txt">Attestations et appels URSSAF</span></div>
-              <div class="io__row"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg><span class="io__row-txt">Avis d'acompte de prélèvement à la source</span></div>
-              <div class="io__row"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg><span class="io__row-txt">Justificatifs de frais réels</span></div>
+              <div class="io__row"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg><span class="io__row-txt">Attestation fiscale et récapitulatifs URSSAF</span></div>
             </div>
           </div>
           <div class="card io__col io__col--out" data-reveal>
-            <div class="io__cap"><svg aria-hidden="true" focusable="false" class="ico ico--lg c-accent"><use href="#i-file-check"/></svg><span class="card__title">Les cases qu'IMPIA remplit</span></div>
+            <div class="io__cap"><svg aria-hidden="true" focusable="false" class="ico ico--lg c-accent"><use href="#i-file-check"/></svg><span class="card__title">Les cases concernées</span></div>
             <p class="hint io__hint">Selon votre régime et votre option pour le versement libératoire.</p>
             <div class="io__list">
               <div class="io__row"><span class="io__code">5HQ</span><span class="io__code-lbl">Recettes micro-BNC</span></div>
               <div class="io__row"><span class="io__code">5KO</span><span class="io__code-lbl">Ventes micro-BIC</span></div>
               <div class="io__row"><span class="io__code">5KP</span><span class="io__code-lbl">Prestations de services micro-BIC</span></div>
               <div class="io__row"><span class="io__code">5TA</span><span class="io__code-lbl">Ventes au versement libératoire</span></div>
+              <div class="io__row"><span class="io__code">5TB</span><span class="io__code-lbl">Prestations BIC au versement libératoire</span></div>
               <div class="io__row"><span class="io__code">5TE</span><span class="io__code-lbl">Recettes BNC au versement libératoire</span></div>
             </div>
           </div>
@@ -372,27 +365,23 @@
       </div>
     </section>
 
-    <!-- ════════════════════ TARIF ════════════════════ -->
-    <section class="section" id="tarif">
+    <!-- ════════════════════ ERREURS REPÉRÉES ════════════════════ -->
+    <section class="section" id="erreurs">
       <div class="container">
         <div class="section__head" style="text-align:center;margin-inline:auto" data-reveal>
-          <h2 class="t-h2">Simple.</h2>
-          <p class="section__lead" style="margin-inline:auto">19 € par an. Pas d'abonnement, pas de palier caché, pas de reconduction.</p>
+          <h2 class="t-h2">Les erreurs qu'IMPIA repère.</h2>
+          <p class="section__lead" style="margin-inline:auto">Remplir une case, c'est rapide. La remplir juste, c'est là que ça coince.</p>
         </div>
         <div class="pricing" data-reveal>
           <div class="card price-card">
-            <span class="overline">Accès complet</span>
-            <div class="price-card__amount"><b>19 €</b><span class="t-body c-muted">/ an</span></div>
-            <p class="card__desc">Toute la période de déclaration, documents illimités.</p>
             <ul class="price-list">
-              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Documents illimités pendant l'année</li>
-              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Toutes les cases du 2042 et du 2042-C-PRO</li>
-              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Récapitulatif PDF téléchargeable</li>
-              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Score de confiance sur chaque extraction</li>
-              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Données hébergées en Europe, PDF supprimés après analyse</li>
+              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Versement libératoire : montants mis dans les cases classiques au lieu de 5TA / 5TB / 5TE</li>
+              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Chiffre d'affaires facturé déclaré au lieu du chiffre d'affaires encaissé</li>
+              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Montants TTC au lieu de HT</li>
+              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Ventes et prestations mélangées dans une seule case</li>
+              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Écart entre vos encaissements et vos déclarations URSSAF</li>
             </ul>
-            <a href="#liste" class="btn btn--primary btn--block btn--lg">Commencer</a>
-            <p class="hint" style="text-align:center;margin-top:var(--sp-3)">Paiement sécurisé par Stripe. Sans reconduction automatique.</p>
+            <p class="hint" style="text-align:center">IMPIA signale, vous décidez. IMPIA ne constitue pas un conseil fiscal.</p>
           </div>
         </div>
       </div>
@@ -402,9 +391,9 @@
     <section class="section" id="liste">
       <div class="container">
         <div class="card waitlist-card" data-reveal>
-          <span class="badge badge--accent badge--dot-blink">Lancement auto-entrepreneurs</span>
+          <span class="badge badge--accent badge--dot-blink">Bêta privée · début 2027</span>
           <h2 class="t-h3" style="margin:var(--sp-4) 0 var(--sp-2)">On construit IMPIA avec des freelances.</h2>
-          <p class="c-2">Laissez votre email : accès prioritaire au lancement, et un cas concret de déclaration d'auto-entrepreneur décortiqué.</p>
+          <p class="c-2">Laissez votre email pour rejoindre la bêta privée (début 2027). Prix prévu après la bêta : 19 € par an. Rien à payer pendant la bêta.</p>
           <!-- Formulaire hébergé par Tally (emails -> Tally -> Make -> Gmail).
                Note : embed externe (tally.so), seule entorse à la règle "zéro CDN". -->
           <div class="tally-embed">
@@ -422,18 +411,18 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <a href="/" class="logo">Imp<em>ia</em></a>
-          <p>La déclaration d'impôts des indépendants, lue et pré-remplie par une IA souveraine.</p>
+          <p>Votre déclaration de micro-entrepreneur, vérifiée case par case. En préparation.</p>
         </div>
         <div class="footer__col">
           <h4>Produit</h4>
           <a href="#fonctionnement">Comment ça marche</a>
-          <a href="#extraction">Ce qu'on remplit</a>
-          <a href="#tarif">Tarif</a>
-          <a href="#liste">Commencer</a>
+          <a href="#extraction">Les cases</a>
+          <a href="#erreurs">Erreurs repérées</a>
+          <a href="#liste">Rejoindre la liste</a>
         </div>
         <div class="footer__col">
           <h4>Légal</h4>
-          <a href="/cgu.html">Conditions générales</a>
+          <a href="/mentions-legales.html">Mentions légales</a>
           <a href="/confidentialite.html">Confidentialité</a>
         </div>
         <div class="footer__col">
@@ -442,8 +431,8 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <span>© 2026 IMPIA. Données traitées et hébergées en Europe.</span>
-        <span>IMPIA ne constitue pas un conseil fiscal.</span>
+        <span>© 2026 IMPIA · Projet en préparation.</span>
+        <span>IMPIA ne constitue pas un conseil fiscal : vous restez responsable de votre déclaration.</span>
       </div>
     </div>
   </footer>
