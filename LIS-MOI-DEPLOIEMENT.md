@@ -1,3 +1,5 @@
+> Mise à jour 11 oct. 2026 : design v3 (clair + sombre), polices auto-hébergées dans `fonts/`, page `beta.html` (Tally), logos dans `brand/`. Les CGU reviendront à l'ouverture du service.
+
 # 👉 Mettre la landing IMPIA en ligne CE SOIR
 
 Ce dossier contient **uniquement la landing** (déjà prête, CTA « Commencer » → waitlist Tally).

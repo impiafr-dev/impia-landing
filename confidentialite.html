@@ -2,52 +2,39 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Politique de confidentialité — IMPIA</title>
-  <meta name="theme-color" content="#080808"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Politique de confidentialité · IMPIA</title>
+  <meta name="robots" content="noindex"/>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="/css/design-system.css"/>
+  <link rel="stylesheet" href="/css/fonts.css"/>
+  <link rel="stylesheet" href="/css/site.css"/>
   <style>
-    /* Page légale — composée sur les tokens du design system. */
-    .glow { position: fixed; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(108,59,255,0.10), transparent 70%); top: -240px; left: 50%; transform: translateX(-50%); pointer-events: none; z-index: 0; }
-    .wrap { max-width: 760px; margin: 0 auto; padding: var(--sp-12) var(--sp-6) var(--sp-20); position: relative; z-index: 1; }
-    .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--sp-12); }
-    .logo { font-size: var(--fs-20); font-weight: 600; letter-spacing: -0.02em; }
-    .logo em { font-style: normal; color: var(--accent); }
-    .back { font-size: var(--fs-13); color: var(--text-2); transition: color var(--dur) var(--ease); }
-    .back:hover { color: var(--text); }
-    .legal h1 { font-size: var(--fs-32); font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--sp-2); }
-    .updated { font-size: var(--fs-13); color: var(--muted); margin-bottom: var(--sp-4); }
-    .intro { font-size: var(--fs-14); color: var(--text-2); padding: var(--sp-4) var(--sp-5); margin-bottom: var(--sp-4); background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); line-height: 1.7; }
-    .highlight { display: flex; gap: var(--sp-3); align-items: flex-start; font-size: var(--fs-14); color: var(--text); padding: var(--sp-4) var(--sp-5); margin-bottom: var(--sp-10); background: var(--green-soft); border: 0.5px solid rgba(34,197,122,0.25); border-radius: var(--r-lg); line-height: 1.6; }
-    .highlight .ico { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; color: var(--green); stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .legal h2 { font-size: var(--fs-18); font-weight: 600; letter-spacing: -0.01em; margin: var(--sp-8) 0 var(--sp-3); }
-    .legal h2 span { color: var(--accent-text); margin-right: var(--sp-2); }
-    .legal p { font-size: var(--fs-14); color: var(--text-2); margin-bottom: var(--sp-3); line-height: 1.7; }
-    .legal ul { margin: 0 0 var(--sp-3) var(--sp-5); }
-    .legal li { font-size: var(--fs-14); color: var(--text-2); margin-bottom: var(--sp-2); line-height: 1.7; }
-    .legal strong { color: var(--text); font-weight: 600; }
-    .legal a { color: var(--accent-text); }
-    .legal a:hover { opacity: 0.85; }
-    .legal table { width: 100%; border-collapse: collapse; margin: var(--sp-2) 0 var(--sp-5); font-size: var(--fs-13); background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
-    .legal th, .legal td { text-align: left; padding: var(--sp-3) var(--sp-4); border-bottom: 0.5px solid var(--border); }
-    .legal th { font-size: var(--fs-12); text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); font-weight: 500; }
-    .legal td { color: var(--text-2); }
-    .legal tr:last-child td { border-bottom: none; }
-    .foot { margin-top: var(--sp-12); padding-top: var(--sp-6); border-top: 0.5px solid var(--border); font-size: var(--fs-13); color: var(--muted); display: flex; gap: var(--sp-4); flex-wrap: wrap; align-items: center; }
-    .foot a { color: var(--text-2); }
-    .foot a:hover { color: var(--text); }
+    .wrap{max-width:760px;margin-inline:auto;padding-block:16px 80px}
+    .top{display:flex;align-items:center;justify-content:space-between;height:68px;margin-bottom:32px}
+    .back{font-size:15px;color:var(--ink-2)}
+    .legal h1{font-size:clamp(36px,5vw,48px);margin-bottom:6px}
+    .updated{font-size:13px;color:var(--muted);margin-bottom:18px}
+    .intro{font-size:15px;color:var(--ink-2);padding:16px 20px;margin-bottom:36px;background:var(--paper);border:1px solid var(--line-2);border-radius:14px;line-height:1.7}
+    .highlight{display:flex;gap:12px;font-size:15px;padding:16px 20px;margin-bottom:36px;background:var(--green-soft);border:1px solid rgba(30,157,99,.25);border-radius:14px;line-height:1.6}
+    .highlight .ico{display:none}
+    .legal h2{font-family:var(--body);font-weight:500;font-size:19px;margin:32px 0 10px}
+    .legal h2 span{color:var(--violet-ink);margin-right:8px}
+    .legal p,.legal li{font-size:15.5px;color:var(--ink-2);line-height:1.7;margin-bottom:10px}
+    .legal ul{margin:0 0 10px 20px}
+    .legal strong{color:var(--ink);font-weight:500}
+    .legal a{color:var(--violet-ink)}
+    .legal table{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:14px;background:var(--paper);border:1px solid var(--line-2);border-radius:12px;overflow:hidden}
+    .legal th,.legal td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+    .legal th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500}
+    .foot{margin-top:48px;padding-top:20px;border-top:1px solid var(--line-2);font-size:13px;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap}
+    .foot a{color:var(--ink-2)}
   </style>
 </head>
 <body>
-  <div class="glow"></div>
-  <div class="wrap legal">
-    <div class="top">
-      <a href="/" class="logo">Imp<em>ia</em></a>
-      <a href="/" class="back">← Retour</a>
-    </div>
-
-    <h1>Politique de confidentialité</h1>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="impia-wm" viewBox="0 0 4653 2157"><g transform="translate(82.2,1568.5)"><g fill="currentColor"><path d="M355.25 -853.25V-119.5Q355.25 -95.5 362.875 -84.0Q370.5 -72.5 385.75 -67.75L429.0 -58.5Q441.25 -53.25 447.25 -46.375Q453.25 -39.5 453.25 -28.0Q453.25 -14.75 444.75 -7.375Q436.25 0.0 421 0H74.75Q60.75 0.0 52.0 -7.375Q43.25 -14.75 43.25 -28.0Q43.25 -39.0 49.25 -45.75Q55.25 -52.5 67 -58L112.25 -67.75Q127.5 -72.5 135.25 -84.0Q143.0 -95.5 143 -119V-714.5Q143.0 -732.25 137.375 -740.625Q131.75 -749.0 119.25 -751.5L60 -753Q48.75 -756.75 43.25 -763.375Q37.75 -770.0 37.75 -779.5Q37.75 -790.5 45.0 -798.125Q52.25 -805.75 68.0 -811.75L268.25 -873.75Q288.5 -881.0 301.25 -884.75Q314.0 -888.5 323.5 -888.5Q339.0 -888.5 347.125 -878.75Q355.25 -869.0 355.25 -853.25Z"/><path d="M828.75 -852.5V-118.5Q828.75 -94.25 835.75 -81.875Q842.75 -69.5 859.25 -64.25L905 -55Q924.5 -46.25 924.5 -27.75Q924.5 0.0 894.5 0.0H548.75Q533.75 0.0 525.375 -7.5Q517 -15 517.0 -27.75Q517.0 -38.25 522.875 -45.5Q528.75 -52.75 539.75 -58.0L586.0 -67.25Q602.75 -72.0 609.625 -83.125Q616.5 -94.25 616.5 -117.0V-715.0Q616.5 -733.5 611.25 -741.875Q606.0 -750.25 593 -753L532.5 -754.5Q521.25 -758.5 516.0 -765.0Q510.75 -771.5 510.75 -780.75Q510.75 -791.5 517.625 -799.25Q524.5 -807.0 541.5 -813.0L742.0 -875.25Q763.5 -883.25 775.25 -885.75Q787.0 -888.25 797.0 -888.25Q812.75 -888.25 820.75 -878.25Q828.75 -868.25 828.75 -852.5ZM807.5 -646.75 779.0 -678.75 816 -715Q915.25 -812.75 997.75 -852.875Q1080.25 -893.0 1155.25 -893.0Q1258.75 -893.0 1323.25 -826.375Q1387.75 -759.75 1387.75 -629.5V-119.0Q1387.75 -93.25 1395.25 -80.875Q1402.75 -68.5 1420.25 -63.25L1458.5 -55.0Q1478.0 -45.75 1478.0 -27.75Q1478 0 1447 0H1109.25Q1079.75 0.0 1079.75 -27.75Q1079.75 -46.25 1099.75 -55.0L1143.5 -63.75Q1163.5 -69.75 1170.25 -83.875Q1177 -98 1177.0 -124.5V-590.75Q1177.0 -677.25 1136.125 -721.875Q1095.25 -766.5 1029.25 -766.5Q983.25 -766.5 936.5 -745.625Q889.75 -724.75 840.25 -677.75ZM1363.0 -651.75 1334.75 -683.5 1370.5 -721.25Q1457.5 -813.0 1529.375 -853.0Q1601.25 -893.0 1674.25 -893.0Q1773.75 -893.0 1829.875 -830.0Q1886 -767 1902.0 -643.25L1970.75 -120.0Q1974.0 -94.5 1980.875 -82.375Q1987.75 -70.25 2004.75 -65.25L2042.0 -57.5Q2052.5 -52.25 2058.25 -45.375Q2064.0 -38.5 2064.0 -27.75Q2064.0 -14.75 2055.75 -7.375Q2047.5 0.0 2032.25 0.0H1687.25Q1657.75 0.0 1657.75 -27.75Q1657.75 -45.5 1678 -55L1721.75 -63.75Q1741.75 -69.5 1750.125 -83.5Q1758.5 -97.5 1755.25 -123.0L1694.0 -590.5Q1682.0 -677.5 1648.375 -722.0Q1614.75 -766.5 1551.75 -766.5Q1514.75 -766.5 1477.0 -746.875Q1439.25 -727.25 1394.5 -684.25Z"/><path d="M2394.75 -856.75V-735.0L2399.0 -719.5V349.5Q2399.0 373.75 2405.875 385.25Q2412.75 396.75 2429.5 401.25L2488.5 410.25Q2500.0 415.25 2505.625 422.5Q2511.25 429.75 2511.25 440.75Q2511.25 453.5 2503.0 461.0Q2494.75 468.5 2479.5 468.5H2123.5Q2109.0 468.5 2100.625 461.125Q2092.25 453.75 2092.25 440.75Q2092.25 430.0 2098.375 422.625Q2104.5 415.25 2116.5 409.75L2156.25 401.25Q2173.0 396.5 2179.875 385.125Q2186.75 373.75 2186.75 350.0V-719.75Q2186.75 -738.0 2181.375 -746.0Q2176 -754 2163.0 -756.75L2103.75 -758.25Q2091.75 -762.25 2086.625 -768.75Q2081.5 -775.25 2081.5 -784.75Q2081.5 -795.75 2088.375 -803.125Q2095.25 -810.5 2111.75 -816.75L2305.5 -877.5Q2328 -886 2340.375 -889.0Q2352.75 -892.0 2362.5 -892.0Q2378.25 -892.0 2386.5 -882.25Q2394.75 -872.5 2394.75 -856.75ZM2366.5 -650.0 2343.25 -687.75Q2411.25 -787.25 2494.75 -840.375Q2578.25 -893.5 2681.5 -893.5Q2786.0 -893.5 2866.5 -840.375Q2947.0 -787.25 2992.75 -689.75Q3038.5 -592.25 3038.5 -458.25Q3038.5 -306.25 2984.5 -198.625Q2930.5 -91.0 2838.125 -34.5Q2745.75 22.0 2630.25 22.0Q2527.75 22.0 2454.25 -23.5Q2380.75 -69.0 2333.75 -156.25L2370.25 -203.75Q2407.75 -129.5 2462.375 -92.75Q2517 -56 2582.75 -56.0Q2650.25 -56.0 2704.0 -95.75Q2757.75 -135.5 2789.0 -218.875Q2820.25 -302.25 2820.25 -432.25Q2820.25 -558.5 2790.875 -640.25Q2761.5 -722.0 2710.75 -762.375Q2660.0 -802.75 2595.0 -802.75Q2533.0 -802.75 2474.5 -764.625Q2416.0 -726.5 2366.5 -650.0Z"/><path d="M3442.25 -853.0V-119.0Q3442.25 -95.0 3449.25 -83.625Q3456.25 -72.25 3472.75 -67.25L3518.0 -58.25Q3529.5 -53.5 3535.125 -46.125Q3540.75 -38.75 3540.75 -27.75Q3540.75 -14.75 3532.5 -7.375Q3524.25 0.0 3509 0H3161.75Q3147 0 3138.75 -7.375Q3130.5 -14.75 3130.5 -27.75Q3130.5 -38.25 3136.0 -45.5Q3141.5 -52.75 3152.75 -57.75L3199.5 -67.25Q3216.25 -72.25 3223.125 -83.625Q3230 -95 3230.0 -118.5V-716Q3230.0 -734.25 3224.625 -742.25Q3219.25 -750.25 3206.25 -753.0L3147.0 -754.5Q3135.0 -758.5 3129.875 -765.0Q3124.75 -771.5 3124.75 -781.0Q3124.75 -792.0 3131.625 -799.5Q3138.5 -807.0 3155 -813L3355.25 -875.0Q3377.5 -883.0 3389.0 -885.625Q3400.5 -888.25 3410.5 -888.25Q3426.0 -888.25 3434.125 -878.5Q3442.25 -868.75 3442.25 -853.0ZM3327.5 -1035.25Q3266.5 -1035.25 3229.25 -1073.0Q3192.0 -1110.75 3192.0 -1168.75Q3192.0 -1227.25 3229.5 -1265.0Q3267.0 -1302.75 3327.5 -1302.75Q3388.75 -1302.75 3426.5 -1265.0Q3464.25 -1227.25 3464.25 -1169.0Q3464.25 -1110.75 3426.375 -1073.0Q3388.5 -1035.25 3327.5 -1035.25Z"/><path d="M4134.5 -107.75V-124.75L4121.0 -123.5V-684.75Q4121.0 -760.5 4086.875 -800.875Q4052.75 -841.25 3990.25 -841.25Q3927.0 -841.25 3894.5 -812.0Q3862.0 -782.75 3862 -743V-683.5Q3862.0 -633.25 3831.625 -603.75Q3801.25 -574.25 3749.0 -574.25Q3704.5 -574.25 3680.625 -598.875Q3656.75 -623.5 3656.75 -668.0Q3656.75 -724.75 3698.375 -776.375Q3740 -828 3821.75 -860.75Q3903.5 -893.5 4023.0 -893.5Q4177.75 -893.5 4255.75 -825.75Q4333.75 -758.0 4333.75 -636.0V-143.5Q4333.75 -113.5 4344.875 -98.0Q4356.0 -82.5 4377.0 -82.5Q4392.5 -82.5 4403.875 -90.375Q4415.25 -98.25 4420.0 -114.75Q4422.5 -119.0 4425.875 -121.5Q4429.25 -124.0 4433.75 -124.0Q4442 -124 4446.375 -117.375Q4450.75 -110.75 4450.75 -100.0Q4450.75 -74.75 4433.0 -47.25Q4415.25 -19.75 4379.375 -0.5Q4343.5 18.75 4289.0 18.75Q4215.0 18.75 4174.75 -16.125Q4134.5 -51.0 4134.5 -107.75ZM3614.0 -196.25Q3614.0 -310.25 3707.625 -378.375Q3801.25 -446.5 3979.25 -446.5Q4035.75 -446.5 4081.0 -436.375Q4126.25 -426.25 4161.5 -410.25L4148.0 -366.75Q4113.5 -382.25 4077.125 -391.0Q4040.75 -399.75 3996.75 -399.75Q3916.75 -399.75 3872.125 -355.25Q3827.5 -310.75 3827.5 -231.75Q3827.5 -155.5 3867.75 -115.25Q3908 -75 3972.25 -75.0Q4023.25 -75.0 4069.625 -98.5Q4116 -122 4147.25 -164.0L4163.0 -124.75Q4118.0 -56.25 4039.125 -18.625Q3960.25 19.0 3867.5 19.0Q3752 19 3683.0 -40.5Q3614 -100 3614.0 -196.25Z"/></g><rect x="55.5" y="-1448.5" width="380.0" height="380.0" rx="83.6" fill="var(--violet)"/></g></symbol></svg>
+<div class="wrap legal">
+  <div class="top"><a href="/" class="logo"><svg class="wm" role="img" aria-label="impia"><use href="#impia-wm"/></svg></a><a href="/" class="back">← Retour</a></div>
+  <h1>Politique de confidentialité</h1>
     <div class="updated">Dernière mise à jour : 11 octobre 2026</div>
     <div class="intro">
       Aujourd'hui, IMPIA ne collecte qu'une seule donnée : l'adresse email que vous laissez pour
@@ -109,13 +96,14 @@
       documents que vous importerez. Vous serez prévenu par email.
     </p>
 
-    <div class="foot">
-      <a href="/">Accueil</a>
-      <a href="/mentions-legales.html">Mentions légales</a>
-      <a href="/confidentialite.html">Confidentialité</a>
-      <a href="mailto:contact@impia.fr">contact@impia.fr</a>
-      <span>© 2026 IMPIA · Projet en préparation</span>
-    </div>
+    
+  <div class="foot">
+    <a href="/">Accueil</a>
+    <a href="/mentions-legales.html">Mentions légales</a>
+    <a href="/confidentialite.html">Confidentialité</a>
+    <span>contact@impia.fr</span>
+    <span>© 2026 IMPIA · En développement</span>
   </div>
+</div>
 </body>
 </html>

@@ -2,462 +2,173 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>IMPIA · Votre 2042-C-PRO de micro-entrepreneur, sans erreur de case</title>
-  <meta name="description" content="IMPIA (en préparation, bêta privée début 2027) calcule votre chiffre d'affaires encaissé à partir de vos factures, relevés et documents URSSAF, indique la bonne case de la 2042-C-PRO et signale les incohérences. Pour les micro-entrepreneurs (BIC / BNC)."/>
-  <meta name="theme-color" content="#080808"/>
+  <meta name="description" content="IMPIA (en développement, bêta privée début 2027) calcule votre chiffre d'affaires encaissé à partir de vos factures, relevés et documents URSSAF, indique la bonne case de la 2042-C-PRO et signale les incohérences. Pour les micro-entrepreneurs (BIC / BNC)."/>
+  <meta name="theme-color" content="#F7F6F9" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#0F0E16" media="(prefers-color-scheme: dark)"/>
   <link rel="canonical" href="https://impia.fr/"/>
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://impia.fr/"/>
   <meta property="og:title" content="IMPIA · Votre 2042-C-PRO, sans erreur de case"/>
   <meta property="og:description" content="Bêta privée début 2027. IMPIA vérifie votre déclaration de micro-entrepreneur case par case, avec Mistral AI."/>
   <meta property="og:locale" content="fr_FR"/>
-
-  <!-- Favicon : monogramme violet, inline (zéro requête externe) -->
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
-
-  <link rel="stylesheet" href="/css/design-system.css"/>
-
-  <style>
-    /* ════════════════════════════════════════════════════════════════
-       LANDING — styles de page uniquement.
-       Contrainte : aucun nouveau langage visuel. On ne fait que composer
-       les tokens du design system (var(--…)) en scaffolding de layout.
-       ════════════════════════════════════════════════════════════════ */
-
-    /* — Icônes inline réutilisées via <use> (stroke cohérent 1.4) — */
-    .ico { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.4;
-           fill: none; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
-    .ico--lg { width: 20px; height: 20px; }
-
-    /* — Rythme des sections (aéré, DENSITY 3) — */
-    .section { padding: var(--sp-24) 0; border-top: 0.5px solid var(--border); }
-    .section__head { max-width: 620px; margin-bottom: var(--sp-12); }
-    .section__head .t-h2 { margin-top: var(--sp-2); }
-    .section__lead { color: var(--text-2); margin-top: var(--sp-4); font-size: var(--fs-16); }
-
-    /* ── NAV : CTA visible en permanence, une seule ligne ── */
-    .nav__cta { display: flex; align-items: center; gap: var(--sp-3); }
-
-    /* ── HERO ── */
-    .hero { padding-top: var(--sp-16); padding-bottom: var(--sp-20); position: relative; overflow: hidden; }
-    /* halo violet unique, très discret, ancré en haut à gauche derrière le titre */
-    .hero::before {
-      content: ''; position: absolute; top: -20%; left: -10%; width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(108,59,255,0.14), transparent 62%);
-      pointer-events: none; z-index: 0;
-    }
-    .hero__grid {
-      position: relative; z-index: 1;
-      display: grid; grid-template-columns: 1.15fr 0.85fr;
-      gap: var(--sp-12); align-items: center;
-    }
-    /* Titre hero : on garde le poids/letter-spacing de .t-display, mais on
-       pilote la taille en clamp pour tenir en 2 lignes de la colonne copy
-       (≈600px au desktop) jusqu'au plein écran. */
-    .hero__title { margin: var(--sp-5) 0 var(--sp-5); font-size: clamp(36px, 5vw, 56px); line-height: 1.04; }
-    .hero__sub { color: var(--text-2); max-width: 42ch; }
-    .hero__cta { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-8); }
-
-    /* — Scène produit du hero : documents → cases 2042 (schéma honnête, pas un faux screenshot) — */
-    /* Les panneaux réutilisent le composant .card du DS ; on n'override que le padding. */
-    .scene { display: grid; gap: var(--sp-3); }
-    .scene__panel { padding: var(--sp-5); }
-    .scene__panel--out { border-color: var(--accent-line); }
-    .scene__hd { margin-bottom: var(--sp-4); }
-    .doc {
-      display: flex; align-items: center; gap: var(--sp-3);
-      padding: var(--sp-3) 0; border-top: 0.5px solid var(--border);
-    }
-    .doc:first-of-type { border-top: 0; }
-    .doc__ico { color: var(--text-2); }
-    .doc__name { font-size: var(--fs-13); color: var(--text); }
-    .doc__meta { margin-left: auto; font-size: var(--fs-12); color: var(--muted); }
-    .scene__arrow { display: flex; justify-content: center; }
-    .scene__arrow span {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 34px; height: 34px; border-radius: var(--r-full);
-      background: var(--accent-soft); border: 0.5px solid var(--accent-line); color: var(--accent);
-    }
-    .box {
-      display: grid; grid-template-columns: 42px 1fr auto; align-items: center; gap: var(--sp-3);
-      padding: var(--sp-3) 0; border-top: 0.5px solid var(--border);
-    }
-    .box:first-of-type { border-top: 0; }
-    .box__code {
-      font-size: var(--fs-12); font-weight: 600; color: var(--accent-text);
-      background: var(--accent-soft); border: 0.5px solid var(--accent-line);
-      border-radius: var(--r-sm); text-align: center; padding: 3px 0; letter-spacing: 0.02em;
-    }
-    .box__label { font-size: var(--fs-13); color: var(--text-2); }
-    .box__val { font-size: var(--fs-14); font-weight: 500; color: var(--text); font-variant-numeric: tabular-nums; }
-    .scene__note { margin-top: var(--sp-4); display: block; }
-
-    /* ── BANDEAU CONFIANCE (souveraineté) ── */
-    .trust {
-      display: flex; flex-wrap: wrap; gap: var(--sp-6) var(--sp-8);
-      align-items: center; justify-content: center;
-      padding: var(--sp-6) 0;
-    }
-    .trust__item { display: flex; align-items: center; gap: var(--sp-2); color: var(--text-2); font-size: var(--fs-13); }
-    .trust__item .ico { color: var(--muted); }
-
-    /* ── PROBLÈME : déclaration + nuage de types de documents ── */
-    .problem__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-16); align-items: center; }
-    .chipwrap { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
-    .chip .ico { color: var(--muted); width: 14px; height: 14px; }
-    .problem__note { margin-top: var(--sp-6); color: var(--muted); }
-
-    /* ── FONCTIONNEMENT : 3 étapes en frise numérotée (pas 3 cartes identiques) ── */
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-8); position: relative; }
-    /* trait de liaison horizontal derrière les numéros */
-    .steps::before {
-      content: ''; position: absolute; top: 19px; left: 8%; right: 8%; height: 0.5px;
-      background: var(--border); z-index: 0;
-    }
-    .step { position: relative; z-index: 1; }
-    .step__n {
-      width: 40px; height: 40px; border-radius: var(--r-full);
-      background: var(--surface-2); border: 0.5px solid var(--border-strong);
-      color: var(--accent-text); font-weight: 600; font-size: var(--fs-16);
-      display: inline-flex; align-items: center; justify-content: center;
-      font-variant-numeric: tabular-nums; margin-bottom: var(--sp-5);
-    }
-    .step__title { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-16); font-weight: 500; margin-bottom: var(--sp-2); }
-    .step__title .ico { color: var(--accent); }
-    .step__desc { color: var(--text-2); font-size: var(--fs-14); max-width: 34ch; }
-
-    /* ── EXTRACTION : split entrée / sortie ── */
-    .io { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
-    /* .io__col réutilise le composant .card du DS ; seul le liseré accent diffère. */
-    .io__col--out { border-color: var(--accent-line); }
-    .io__cap { display: flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-5); }
-    .io__hint { margin: calc(-1 * var(--sp-3)) 0 var(--sp-5); }
-    .io__list { display: grid; gap: var(--sp-1); }
-    .io__row { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) 0; border-top: 0.5px solid var(--border); }
-    .io__row:first-child { border-top: 0; }
-    .io__row .ico { color: var(--green); }
-    .io__row-txt { font-size: var(--fs-14); color: var(--text); }
-    .io__code {
-      font-size: var(--fs-12); font-weight: 600; color: var(--accent-text);
-      background: var(--accent-soft); border: 0.5px solid var(--accent-line);
-      border-radius: var(--r-sm); padding: 2px 7px; min-width: 40px; text-align: center;
-    }
-    .io__code-lbl { font-size: var(--fs-14); color: var(--text-2); }
-
-    /* ── TARIF : une seule offre, centrée ── */
-    .pricing { display: flex; justify-content: center; }
-    .price-card { width: 100%; max-width: 440px; text-align: left; }
-    .price-card__amount { display: flex; align-items: baseline; gap: var(--sp-2); margin: var(--sp-2) 0 var(--sp-1); }
-    .price-card__amount b { font-size: var(--fs-40); font-weight: 600; letter-spacing: -0.02em; }
-    .price-list { display: grid; gap: var(--sp-3); margin: var(--sp-6) 0 var(--sp-8); }
-    .price-list li { display: flex; align-items: flex-start; gap: var(--sp-3); font-size: var(--fs-14); color: var(--text-2); list-style: none; }
-    .price-list .ico { color: var(--green); margin-top: 2px; }
-
-    /* ── LISTE D'ATTENTE ── */
-    .waitlist-card { max-width: 560px; margin-inline: auto; text-align: center; }
-    .tally-embed { margin-top: var(--sp-6); }
-    .tally-embed iframe { border: 0; width: 100%; display: block; }
-
-    /* ── FOOTER ── */
-    .footer { border-top: 0.5px solid var(--border); padding: var(--sp-16) 0 var(--sp-12); }
-    .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: var(--sp-8); }
-    .footer__col h4 { font-size: var(--fs-12); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: var(--sp-4); }
-    .footer__col a { display: block; color: var(--text-2); font-size: var(--fs-14); padding: var(--sp-1) 0; transition: color var(--dur) var(--ease); }
-    .footer__col a:hover { color: var(--text); }
-    .footer__brand p { color: var(--muted); font-size: var(--fs-13); max-width: 34ch; margin-top: var(--sp-3); }
-    .footer__bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-12); padding-top: var(--sp-6); border-top: 0.5px solid var(--border); }
-    .footer__bottom span { color: var(--muted); font-size: var(--fs-12); }
-
-    /* ── Révélation au scroll (IntersectionObserver, jamais de scroll listener) ── */
-    [data-reveal] { opacity: 0; transform: translateY(12px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
-    [data-reveal].is-visible { opacity: 1; transform: none; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero__grid { grid-template-columns: 1fr; gap: var(--sp-10); }
-      .problem__grid { grid-template-columns: 1fr; gap: var(--sp-8); }
-      .steps { grid-template-columns: 1fr; gap: var(--sp-6); }
-      .steps::before { display: none; }
-      .io { grid-template-columns: 1fr; }
-      .footer__grid { grid-template-columns: 1fr 1fr; gap: var(--sp-8); }
-    }
-    @media (max-width: 640px) {
-      .section { padding: var(--sp-16) 0; }
-      .nav__links .nav__link { display: none; }   /* on garde logo + CTA sur mobile */
-      .nav__cta .btn { height: 38px; padding: 0 var(--sp-4); }  /* cible tactile ≥ 38px */
-      .hero { padding-top: var(--sp-10); }
-      .footer__grid { grid-template-columns: 1fr 1fr; }
-      .footer__brand { grid-column: 1 / -1; }
-      .footer__col a { padding: var(--sp-2) 0; }   /* zone cliquable élargie */
-    }
-
-    /* Sécurité accessibilité : sans animation, tout reste visible */
-    @media (prefers-reduced-motion: reduce) {
-      [data-reveal] { opacity: 1; transform: none; }
-    }
-  </style>
-  <!-- Fallback sans JavaScript : sans l'IntersectionObserver, tout le contenu reste visible -->
-  <noscript><style>[data-reveal]{opacity:1;transform:none;}</style></noscript>
+  <link rel="stylesheet" href="/css/fonts.css"/>
+  <link rel="stylesheet" href="/css/site.css"/>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="impia-wm" viewBox="0 0 4653 2157"><g transform="translate(82.2,1568.5)"><g fill="currentColor"><path d="M355.25 -853.25V-119.5Q355.25 -95.5 362.875 -84.0Q370.5 -72.5 385.75 -67.75L429.0 -58.5Q441.25 -53.25 447.25 -46.375Q453.25 -39.5 453.25 -28.0Q453.25 -14.75 444.75 -7.375Q436.25 0.0 421 0H74.75Q60.75 0.0 52.0 -7.375Q43.25 -14.75 43.25 -28.0Q43.25 -39.0 49.25 -45.75Q55.25 -52.5 67 -58L112.25 -67.75Q127.5 -72.5 135.25 -84.0Q143.0 -95.5 143 -119V-714.5Q143.0 -732.25 137.375 -740.625Q131.75 -749.0 119.25 -751.5L60 -753Q48.75 -756.75 43.25 -763.375Q37.75 -770.0 37.75 -779.5Q37.75 -790.5 45.0 -798.125Q52.25 -805.75 68.0 -811.75L268.25 -873.75Q288.5 -881.0 301.25 -884.75Q314.0 -888.5 323.5 -888.5Q339.0 -888.5 347.125 -878.75Q355.25 -869.0 355.25 -853.25Z"/><path d="M828.75 -852.5V-118.5Q828.75 -94.25 835.75 -81.875Q842.75 -69.5 859.25 -64.25L905 -55Q924.5 -46.25 924.5 -27.75Q924.5 0.0 894.5 0.0H548.75Q533.75 0.0 525.375 -7.5Q517 -15 517.0 -27.75Q517.0 -38.25 522.875 -45.5Q528.75 -52.75 539.75 -58.0L586.0 -67.25Q602.75 -72.0 609.625 -83.125Q616.5 -94.25 616.5 -117.0V-715.0Q616.5 -733.5 611.25 -741.875Q606.0 -750.25 593 -753L532.5 -754.5Q521.25 -758.5 516.0 -765.0Q510.75 -771.5 510.75 -780.75Q510.75 -791.5 517.625 -799.25Q524.5 -807.0 541.5 -813.0L742.0 -875.25Q763.5 -883.25 775.25 -885.75Q787.0 -888.25 797.0 -888.25Q812.75 -888.25 820.75 -878.25Q828.75 -868.25 828.75 -852.5ZM807.5 -646.75 779.0 -678.75 816 -715Q915.25 -812.75 997.75 -852.875Q1080.25 -893.0 1155.25 -893.0Q1258.75 -893.0 1323.25 -826.375Q1387.75 -759.75 1387.75 -629.5V-119.0Q1387.75 -93.25 1395.25 -80.875Q1402.75 -68.5 1420.25 -63.25L1458.5 -55.0Q1478.0 -45.75 1478.0 -27.75Q1478 0 1447 0H1109.25Q1079.75 0.0 1079.75 -27.75Q1079.75 -46.25 1099.75 -55.0L1143.5 -63.75Q1163.5 -69.75 1170.25 -83.875Q1177 -98 1177.0 -124.5V-590.75Q1177.0 -677.25 1136.125 -721.875Q1095.25 -766.5 1029.25 -766.5Q983.25 -766.5 936.5 -745.625Q889.75 -724.75 840.25 -677.75ZM1363.0 -651.75 1334.75 -683.5 1370.5 -721.25Q1457.5 -813.0 1529.375 -853.0Q1601.25 -893.0 1674.25 -893.0Q1773.75 -893.0 1829.875 -830.0Q1886 -767 1902.0 -643.25L1970.75 -120.0Q1974.0 -94.5 1980.875 -82.375Q1987.75 -70.25 2004.75 -65.25L2042.0 -57.5Q2052.5 -52.25 2058.25 -45.375Q2064.0 -38.5 2064.0 -27.75Q2064.0 -14.75 2055.75 -7.375Q2047.5 0.0 2032.25 0.0H1687.25Q1657.75 0.0 1657.75 -27.75Q1657.75 -45.5 1678 -55L1721.75 -63.75Q1741.75 -69.5 1750.125 -83.5Q1758.5 -97.5 1755.25 -123.0L1694.0 -590.5Q1682.0 -677.5 1648.375 -722.0Q1614.75 -766.5 1551.75 -766.5Q1514.75 -766.5 1477.0 -746.875Q1439.25 -727.25 1394.5 -684.25Z"/><path d="M2394.75 -856.75V-735.0L2399.0 -719.5V349.5Q2399.0 373.75 2405.875 385.25Q2412.75 396.75 2429.5 401.25L2488.5 410.25Q2500.0 415.25 2505.625 422.5Q2511.25 429.75 2511.25 440.75Q2511.25 453.5 2503.0 461.0Q2494.75 468.5 2479.5 468.5H2123.5Q2109.0 468.5 2100.625 461.125Q2092.25 453.75 2092.25 440.75Q2092.25 430.0 2098.375 422.625Q2104.5 415.25 2116.5 409.75L2156.25 401.25Q2173.0 396.5 2179.875 385.125Q2186.75 373.75 2186.75 350.0V-719.75Q2186.75 -738.0 2181.375 -746.0Q2176 -754 2163.0 -756.75L2103.75 -758.25Q2091.75 -762.25 2086.625 -768.75Q2081.5 -775.25 2081.5 -784.75Q2081.5 -795.75 2088.375 -803.125Q2095.25 -810.5 2111.75 -816.75L2305.5 -877.5Q2328 -886 2340.375 -889.0Q2352.75 -892.0 2362.5 -892.0Q2378.25 -892.0 2386.5 -882.25Q2394.75 -872.5 2394.75 -856.75ZM2366.5 -650.0 2343.25 -687.75Q2411.25 -787.25 2494.75 -840.375Q2578.25 -893.5 2681.5 -893.5Q2786.0 -893.5 2866.5 -840.375Q2947.0 -787.25 2992.75 -689.75Q3038.5 -592.25 3038.5 -458.25Q3038.5 -306.25 2984.5 -198.625Q2930.5 -91.0 2838.125 -34.5Q2745.75 22.0 2630.25 22.0Q2527.75 22.0 2454.25 -23.5Q2380.75 -69.0 2333.75 -156.25L2370.25 -203.75Q2407.75 -129.5 2462.375 -92.75Q2517 -56 2582.75 -56.0Q2650.25 -56.0 2704.0 -95.75Q2757.75 -135.5 2789.0 -218.875Q2820.25 -302.25 2820.25 -432.25Q2820.25 -558.5 2790.875 -640.25Q2761.5 -722.0 2710.75 -762.375Q2660.0 -802.75 2595.0 -802.75Q2533.0 -802.75 2474.5 -764.625Q2416.0 -726.5 2366.5 -650.0Z"/><path d="M3442.25 -853.0V-119.0Q3442.25 -95.0 3449.25 -83.625Q3456.25 -72.25 3472.75 -67.25L3518.0 -58.25Q3529.5 -53.5 3535.125 -46.125Q3540.75 -38.75 3540.75 -27.75Q3540.75 -14.75 3532.5 -7.375Q3524.25 0.0 3509 0H3161.75Q3147 0 3138.75 -7.375Q3130.5 -14.75 3130.5 -27.75Q3130.5 -38.25 3136.0 -45.5Q3141.5 -52.75 3152.75 -57.75L3199.5 -67.25Q3216.25 -72.25 3223.125 -83.625Q3230 -95 3230.0 -118.5V-716Q3230.0 -734.25 3224.625 -742.25Q3219.25 -750.25 3206.25 -753.0L3147.0 -754.5Q3135.0 -758.5 3129.875 -765.0Q3124.75 -771.5 3124.75 -781.0Q3124.75 -792.0 3131.625 -799.5Q3138.5 -807.0 3155 -813L3355.25 -875.0Q3377.5 -883.0 3389.0 -885.625Q3400.5 -888.25 3410.5 -888.25Q3426.0 -888.25 3434.125 -878.5Q3442.25 -868.75 3442.25 -853.0ZM3327.5 -1035.25Q3266.5 -1035.25 3229.25 -1073.0Q3192.0 -1110.75 3192.0 -1168.75Q3192.0 -1227.25 3229.5 -1265.0Q3267.0 -1302.75 3327.5 -1302.75Q3388.75 -1302.75 3426.5 -1265.0Q3464.25 -1227.25 3464.25 -1169.0Q3464.25 -1110.75 3426.375 -1073.0Q3388.5 -1035.25 3327.5 -1035.25Z"/><path d="M4134.5 -107.75V-124.75L4121.0 -123.5V-684.75Q4121.0 -760.5 4086.875 -800.875Q4052.75 -841.25 3990.25 -841.25Q3927.0 -841.25 3894.5 -812.0Q3862.0 -782.75 3862 -743V-683.5Q3862.0 -633.25 3831.625 -603.75Q3801.25 -574.25 3749.0 -574.25Q3704.5 -574.25 3680.625 -598.875Q3656.75 -623.5 3656.75 -668.0Q3656.75 -724.75 3698.375 -776.375Q3740 -828 3821.75 -860.75Q3903.5 -893.5 4023.0 -893.5Q4177.75 -893.5 4255.75 -825.75Q4333.75 -758.0 4333.75 -636.0V-143.5Q4333.75 -113.5 4344.875 -98.0Q4356.0 -82.5 4377.0 -82.5Q4392.5 -82.5 4403.875 -90.375Q4415.25 -98.25 4420.0 -114.75Q4422.5 -119.0 4425.875 -121.5Q4429.25 -124.0 4433.75 -124.0Q4442 -124 4446.375 -117.375Q4450.75 -110.75 4450.75 -100.0Q4450.75 -74.75 4433.0 -47.25Q4415.25 -19.75 4379.375 -0.5Q4343.5 18.75 4289.0 18.75Q4215.0 18.75 4174.75 -16.125Q4134.5 -51.0 4134.5 -107.75ZM3614.0 -196.25Q3614.0 -310.25 3707.625 -378.375Q3801.25 -446.5 3979.25 -446.5Q4035.75 -446.5 4081.0 -436.375Q4126.25 -426.25 4161.5 -410.25L4148.0 -366.75Q4113.5 -382.25 4077.125 -391.0Q4040.75 -399.75 3996.75 -399.75Q3916.75 -399.75 3872.125 -355.25Q3827.5 -310.75 3827.5 -231.75Q3827.5 -155.5 3867.75 -115.25Q3908 -75 3972.25 -75.0Q4023.25 -75.0 4069.625 -98.5Q4116 -122 4147.25 -164.0L4163.0 -124.75Q4118.0 -56.25 4039.125 -18.625Q3960.25 19.0 3867.5 19.0Q3752 19 3683.0 -40.5Q3614 -100 3614.0 -196.25Z"/></g><rect x="55.5" y="-1448.5" width="380.0" height="380.0" rx="83.6" fill="var(--violet)"/></g></symbol></svg>
 
-  <!-- ══ Sprite d'icônes inline (défini une fois, réutilisé via <use>) ══ -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
-    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></symbol>
-    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></symbol>
-    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
-    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m2 0v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V7"/></symbol>
-    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V4m0 0 4 4m-4-4-4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
-    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="8" rx="1"/><path d="M4 9h4M4 15h4M16 9h4M16 15h4M9 4v4M15 4v4M9 16v4M15 16v4"/></symbol>
-    <symbol id="i-file-check" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="m9 15 2 2 4-4"/></symbol>
-    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
-    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10 12 4l9 6"/><path d="M5 10v8m4-8v8m6-8v8m4-8v8M3 20h18"/></symbol>
-    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3v18l2-1 2 1 2-1 2 1 2-1 2 1V3l-2 1-2-1-2 1-2-1-2 1z"/><path d="M9 8h6M9 12h6"/></symbol>
-  </svg>
 
-  <!-- ════════════════════ NAV ════════════════════ -->
-  <nav class="nav">
-    <div class="container nav__inner">
-      <a href="/" class="logo" aria-label="IMPIA, accueil">Imp<em>ia</em></a>
-      <div class="nav__links">
-        <a href="#fonctionnement" class="nav__link">Comment ça marche</a>
-        <a href="#extraction" class="nav__link">Les cases</a>
-        <a href="#erreurs" class="nav__link">Erreurs repérées</a>
-        <div class="nav__cta">
-          <a href="#liste" class="btn btn--primary btn--sm">Rejoindre la liste</a>
-        </div>
+<nav class="nav"><div class="wrap">
+  <a href="#top" class="logo"><svg class="wm" role="img" aria-label="impia"><use href="#impia-wm"/></svg></a>
+  <div class="nav-links"><a href="#methode">Méthode</a><a href="#comparer">Comparer</a><a href="#faq">Questions</a></div>
+  <a href="/beta.html" class="btn btn-dark btn-sm">Rejoindre la bêta</a>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="sky" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="tag">Bêta privée · début 2027 · gratuite</span>
+    <h1>Votre 2042-C-PRO, sans erreur de case.</h1>
+    <p class="lead">Déposez vos factures, relevés et documents URSSAF. IMPIA calcule ce que vous avez réellement encaissé, indique la bonne case et signale ce qui ne colle pas. Vous vérifiez, puis vous déclarez vous-même.</p>
+    <div class="hero-cta"><a href="/beta.html" class="btn btn-white">Rejoindre la bêta</a></div>
+    <p class="hero-fine">Pour les micro-entrepreneurs en micro-BIC et micro-BNC. IMPIA ne constitue pas un conseil fiscal.</p>
+  </div>
+
+  <div class="win" aria-label="Aperçu du récapitulatif sur un dossier fictif">
+    <div class="win-bar"><i></i><i></i><i></i><span>Dossier 2026 · Clara, consultante (BNC) · exemple fictif</span></div>
+    <div class="win-body">
+      <aside class="side">
+        <h4>Documents</h4>
+        <div class="doc"><i></i>facture_K-1.pdf<small>2 000</small></div>
+        <div class="doc"><i></i>facture_K-2.pdf<small>1 500</small></div>
+        <div class="doc on"><i></i>facture_K-3.pdf<small>3 000</small></div>
+        <div class="doc"><i></i>facture_K-4.pdf<small>1 000</small></div>
+        <div class="doc"><i></i>releve_2026.pdf<small>4 vir.</small></div>
+        <div class="doc"><i></i>urssaf_recap.pdf<small>4 trim.</small></div>
+      </aside>
+      <div class="main">
+        <h4>Récapitulatif 2042-C-PRO</h4>
+        <div class="box"><span class="code">5HQ</span><div>Recettes micro-BNC 2026<div class="sub">4 encaissements · hors TVA · versement libératoire : non</div></div><span class="amt">7 500 €</span></div>
+        <div class="flag"><i></i><div><b>Écart URSSAF au 3e trimestre : 1 000 €</b><br>Vous avez encaissé 3 000 € (facture K-3, virement du 30/08) mais déclaré 2 000 €. À vérifier avant de déclarer.</div></div>
+        <div class="chips"><span class="chip ok">Encaissé, pas facturé</span><span class="chip ok">Hors TVA</span><span class="chip ok">Case 5HY laissée vide</span><span class="chip">Sources : K-1, K-2, K-3, K-4</span></div>
       </div>
     </div>
-  </nav>
+  </div>
+</header>
 
-  <main>
-    <!-- ════════════════════ HERO ════════════════════ -->
-    <header class="hero">
-      <div class="container hero__grid">
-        <div class="hero__copy" data-reveal>
-          <span class="badge badge--accent">En préparation · bêta privée début 2027 · Mistral AI</span>
-          <h1 class="t-display hero__title">Votre 2042-C-PRO, sans erreur de case.</h1>
-          <p class="t-lg hero__sub">Déposez vos factures, relevés et attestations URSSAF. IMPIA calcule votre chiffre d'affaires encaissé, indique la bonne case et signale les incohérences. Vous vérifiez et vous déclarez vous-même sur impots.gouv.fr.</p>
-          <div class="hero__cta">
-            <a href="#liste" class="btn btn--primary btn--lg">Rejoindre la liste</a>
-            <a href="#fonctionnement" class="btn btn--secondary btn--lg">Voir le fonctionnement</a>
-          </div>
-        </div>
+<section class="statement center"><div class="wrap">
+  <h2>Remplir la case prend dix minutes. <em>La remplir juste</em>, c'est une autre histoire.</h2>
+  <p class="lead" style="margin-top:20px">Une case fausse change votre base d'imposition. Versement libératoire oublié, montant TTC, facture de décembre comptée trop tôt : les erreurs sont classiques, et personne ne les vérifie pour vous.</p>
+  <div class="facts">
+    <div class="fact"><b>3 catégories</b><span>Ventes, prestations BIC, BNC : chacune a sa case et son abattement (71 %, 50 %, 34 %).</span></div>
+    <div class="fact"><b>2 jeux de cases</b><span>Avec ou sans versement libératoire. Se tromper, c'est payer deux fois.</span></div>
+    <div class="fact"><b>1 montant qui compte</b><span>Le chiffre d'affaires encaissé dans l'année, hors TVA, avant abattement.</span></div>
+  </div>
+</div></section>
 
-        <!-- Scène produit : entrée (documents) → sortie (cases). Schéma illustratif, pas un screenshot. -->
-        <div class="hero__visual" data-reveal aria-hidden="true">
-          <div class="scene">
-            <div class="card scene__panel">
-              <div class="row-between scene__hd">
-                <span class="t-sm c-2">Vos documents</span>
-                <span class="badge badge--muted">3 fichiers</span>
-              </div>
-              <div class="doc"><svg aria-hidden="true" focusable="false" class="ico doc__ico"><use href="#i-receipt"/></svg><span class="doc__name">Factures_clients_2026.pdf</span><span class="doc__meta">312 Ko</span></div>
-              <div class="doc"><svg aria-hidden="true" focusable="false" class="ico doc__ico"><use href="#i-bank"/></svg><span class="doc__name">Releve_pro_2026.pdf</span><span class="doc__meta">1,1 Mo</span></div>
-              <div class="doc"><svg aria-hidden="true" focusable="false" class="ico doc__ico"><use href="#i-doc"/></svg><span class="doc__name">Attestation_fiscale_URSSAF.pdf</span><span class="doc__meta">88 Ko</span></div>
-            </div>
-            <div class="scene__arrow"><span><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-arrow-down"/></svg></span></div>
-            <div class="card scene__panel scene__panel--out">
-              <div class="row-between scene__hd">
-                <span class="t-sm c-2">2042-C-PRO</span>
-                <span class="badge badge--muted">Exemple fictif</span>
-              </div>
-              <div class="box"><span class="box__code">5KO</span><span class="box__label">Ventes micro-BIC</span><span class="box__val">18 400 €</span></div>
-              <div class="box"><span class="box__code">5KP</span><span class="box__label">Prestations de services</span><span class="box__val">6 900 €</span></div>
-              <span class="t-xs c-muted scene__note">Exemple fictif. Vous vérifiez chaque montant avant de le reporter vous-même.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- ════════════════════ BANDEAU CONFIANCE ════════════════════ -->
-    <section aria-label="Engagements prévus pour le lancement">
-      <div class="container">
-        <div class="trust" data-reveal>
-          <span class="trust__item"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-shield"/></svg>Conçu avec Mistral AI (France)</span>
-          <span class="trust__item"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-globe"/></svg>Prévu : hébergement en Europe</span>
-          <span class="trust__item"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-trash"/></svg>Prévu : PDF supprimés après analyse</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════ PROBLÈME ════════════════════ -->
-    <section class="section" id="probleme">
-      <div class="container problem__grid">
-        <div data-reveal>
-          <h2 class="t-h2">Vous ne gagnez pas d'argent à chercher dans quelle case va quoi.</h2>
-          <p class="section__lead">Chaque printemps, la même corvée : un dossier de PDF en vrac, des montants à recopier, et le doute permanent sur la bonne ligne du 2042-C-PRO. IMPIA fait le tri avec vous et vous montre d'où vient chaque montant.</p>
-          <p class="t-sm problem__note">Micro-BIC, micro-BNC, versement libératoire : IMPIA applique les règles de la déclaration des micro-entrepreneurs.</p>
-        </div>
-        <div class="chipwrap" data-reveal>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-receipt"/></svg>Factures clients</span>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-receipt"/></svg>Avoirs</span>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-bank"/></svg>Relevés bancaires pro</span>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-doc"/></svg>Attestation fiscale URSSAF</span>
-          <span class="chip"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-doc"/></svg>Récapitulatifs URSSAF</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════ FONCTIONNEMENT (3 étapes) ════════════════════ -->
-    <section class="section" id="fonctionnement">
-      <div class="container">
-        <div class="section__head" data-reveal>
-          <h2 class="t-h2">Comment ça marche</h2>
-          <p class="section__lead">Trois étapes.</p>
-        </div>
-        <div class="steps">
-          <div class="step" data-reveal>
-            <div class="step__n">01</div>
-            <div class="step__title"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-upload"/></svg>Importez</div>
-            <p class="step__desc">Glissez vos PDF : factures, avoirs, relevés bancaires, documents URSSAF, sans classement préalable.</p>
-          </div>
-          <div class="step" data-reveal>
-            <div class="step__n">02</div>
-            <div class="step__title"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-cpu"/></svg>L'IA lit et trie</div>
-            <p class="step__desc">IMPIA calcule le chiffre d'affaires encaissé de l'année, hors TVA, par catégorie, et vérifie qu'il correspond à vos déclarations URSSAF.</p>
-          </div>
-          <div class="step" data-reveal>
-            <div class="step__n">03</div>
-            <div class="step__title"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-file-check"/></svg>Récapitulatif à vérifier</div>
-            <p class="step__desc">Chaque montant renvoie au document d'origine. Vous vérifiez, puis vous déclarez vous-même sur impots.gouv.fr.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════ EXTRACTION (entrée / sortie) ════════════════════ -->
-    <section class="section" id="extraction">
-      <div class="container">
-        <div class="section__head" data-reveal>
-          <h2 class="t-h2">Ce qu'on lit, ce qu'on calcule.</h2>
-          <p class="section__lead">Vos documents entrent en vrac. Vous obtenez les montants à reporter, case par case, avec leur justification.</p>
-        </div>
-        <div class="io">
-          <div class="card io__col" data-reveal>
-            <div class="io__cap"><svg aria-hidden="true" focusable="false" class="ico ico--lg c-2"><use href="#i-upload"/></svg><span class="card__title">Vos documents</span></div>
-            <div class="io__list">
-              <div class="io__row"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg><span class="io__row-txt">Factures et avoirs</span></div>
-              <div class="io__row"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg><span class="io__row-txt">Relevés bancaires professionnels</span></div>
-              <div class="io__row"><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg><span class="io__row-txt">Attestation fiscale et récapitulatifs URSSAF</span></div>
-            </div>
-          </div>
-          <div class="card io__col io__col--out" data-reveal>
-            <div class="io__cap"><svg aria-hidden="true" focusable="false" class="ico ico--lg c-accent"><use href="#i-file-check"/></svg><span class="card__title">Les cases concernées</span></div>
-            <p class="hint io__hint">Selon votre régime et votre option pour le versement libératoire.</p>
-            <div class="io__list">
-              <div class="io__row"><span class="io__code">5HQ</span><span class="io__code-lbl">Recettes micro-BNC</span></div>
-              <div class="io__row"><span class="io__code">5KO</span><span class="io__code-lbl">Ventes micro-BIC</span></div>
-              <div class="io__row"><span class="io__code">5KP</span><span class="io__code-lbl">Prestations de services micro-BIC</span></div>
-              <div class="io__row"><span class="io__code">5TA</span><span class="io__code-lbl">Ventes au versement libératoire</span></div>
-              <div class="io__row"><span class="io__code">5TB</span><span class="io__code-lbl">Prestations BIC au versement libératoire</span></div>
-              <div class="io__row"><span class="io__code">5TE</span><span class="io__code-lbl">Recettes BNC au versement libératoire</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════ ERREURS REPÉRÉES ════════════════════ -->
-    <section class="section" id="erreurs">
-      <div class="container">
-        <div class="section__head" style="text-align:center;margin-inline:auto" data-reveal>
-          <h2 class="t-h2">Les erreurs qu'IMPIA repère.</h2>
-          <p class="section__lead" style="margin-inline:auto">Remplir une case, c'est rapide. La remplir juste, c'est là que ça coince.</p>
-        </div>
-        <div class="pricing" data-reveal>
-          <div class="card price-card">
-            <ul class="price-list">
-              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Versement libératoire : montants mis dans les cases classiques au lieu de 5TA / 5TB / 5TE</li>
-              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Chiffre d'affaires facturé déclaré au lieu du chiffre d'affaires encaissé</li>
-              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Montants TTC au lieu de HT</li>
-              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Ventes et prestations mélangées dans une seule case</li>
-              <li><svg aria-hidden="true" focusable="false" class="ico"><use href="#i-check"/></svg>Écart entre vos encaissements et vos déclarations URSSAF</li>
-            </ul>
-            <p class="hint" style="text-align:center">IMPIA signale, vous décidez. IMPIA ne constitue pas un conseil fiscal.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════ LISTE D'ATTENTE ════════════════════ -->
-    <section class="section" id="liste">
-      <div class="container">
-        <div class="card waitlist-card" data-reveal>
-          <span class="badge badge--accent badge--dot-blink">Bêta privée · début 2027</span>
-          <h2 class="t-h3" style="margin:var(--sp-4) 0 var(--sp-2)">On construit IMPIA avec des freelances.</h2>
-          <p class="c-2">Laissez votre email pour rejoindre la bêta privée (début 2027). Prix prévu après la bêta : 19 € par an. Rien à payer pendant la bêta.</p>
-          <!-- Formulaire hébergé par Tally (emails -> Tally -> Make -> Gmail).
-               Note : embed externe (tally.so), seule entorse à la règle "zéro CDN". -->
-          <div class="tally-embed">
-            <iframe data-tally-src="https://tally.so/embed/LZVYGO?alignLeft=0&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-                    loading="lazy" width="100%" height="180" frameborder="0" title="Rejoindre la liste IMPIA"></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ════════════════════ FOOTER ════════════════════ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <a href="/" class="logo">Imp<em>ia</em></a>
-          <p>Votre déclaration de micro-entrepreneur, vérifiée case par case. En préparation.</p>
-        </div>
-        <div class="footer__col">
-          <h4>Produit</h4>
-          <a href="#fonctionnement">Comment ça marche</a>
-          <a href="#extraction">Les cases</a>
-          <a href="#erreurs">Erreurs repérées</a>
-          <a href="#liste">Rejoindre la liste</a>
-        </div>
-        <div class="footer__col">
-          <h4>Légal</h4>
-          <a href="/mentions-legales.html">Mentions légales</a>
-          <a href="/confidentialite.html">Confidentialité</a>
-        </div>
-        <div class="footer__col">
-          <h4>Contact</h4>
-          <a href="mailto:contact@impia.fr">contact@impia.fr</a>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <span>© 2026 IMPIA · Projet en préparation.</span>
-        <span>IMPIA ne constitue pas un conseil fiscal : vous restez responsable de votre déclaration.</span>
-      </div>
+<section id="methode" style="padding-top:0"><div class="wrap">
+  <div class="feat">
+    <div class="copy"><span class="k">Encaissé, pas facturé</span><h2>La facture de décembre payée en janvier compte l'année suivante.</h2><p>IMPIA rapproche chaque facture du virement correspondant sur votre relevé et ne retient que ce qui a été reçu entre le 1er janvier et le 31 décembre.</p></div>
+    <div class="frag"><h4>Rapprochement factures · relevé</h4>
+      <div class="line"><div>V-103 · Marché de créateurs<small>émise 19/08 · encaissée 19/08/2026</small></div><span class="pillx g">2026</span></div>
+      <div class="line"><div>V-102 · Boutique Partenaire<small>émise 03/04 · encaissée 30/04/2026</small></div><span class="pillx g">2026</span></div>
+      <div class="line off"><div>V-104 · Lot Noël<small>émise 20/12/2026 · encaissée 12/01/2027</small></div><span class="pillx a">2027</span></div>
+      <div class="line"><div><b>Ventes encaissées 2026</b></div><span class="amt">4 190 €</span></div>
     </div>
-  </footer>
+  </div>
+  <div class="feat">
+    <div class="copy"><span class="k">La bonne case, selon votre option</span><h2>Versement libératoire ou pas, ce ne sont pas les mêmes cases.</h2><p>IMPIA lit votre option sur le récapitulatif URSSAF et place le montant dans la bonne ligne. Essayez : la case change, le montant reste.</p></div>
+    <div class="frag"><h4>Option versement libératoire</h4>
+      <div class="toggle" role="group" aria-label="Versement libératoire"><button type="button" id="vlN" aria-pressed="true">Non</button><button type="button" id="vlO" aria-pressed="false">Oui</button></div>
+      <div class="box" style="margin-top:4px"><span class="code" id="vlCode">5HQ</span><div id="vlLbl">Recettes BNC, régime classique<div class="sub" id="vlSub">Abattement de 34 % appliqué par l'administration</div></div><span class="amt">6 140 €</span></div>
+      <div class="line off" id="vlWarn" style="display:none"><div>5HQ laissée vide<small>Sinon vos recettes seraient imposées une seconde fois</small></div><span class="pillx g">évité</span></div>
+    </div>
+  </div>
+  <div class="feat">
+    <div class="copy"><span class="k">Écart URSSAF</span><h2>Ce que vous avez encaissé doit correspondre à ce que vous avez déclaré.</h2><p>Trimestre par trimestre, IMPIA compare vos encaissements au récapitulatif URSSAF. Un trimestre sous-déclaré ou un virement oublié ressort tout de suite.</p></div>
+    <div class="frag"><h4>Encaissé vs déclaré · 2026</h4>
+      <div class="bars">
+        <div class="bar"><div><i style="height:52%"></i></div><b>2 000</b>T1</div>
+        <div class="bar"><div><i style="height:39%"></i></div><b>1 500</b>T2</div>
+        <div class="bar"><div><i style="height:52%;background:var(--amber-soft);border-color:rgba(201,121,10,.35)"></i><i class="ghost" style="height:78%"></i></div><b style="color:var(--amber)">2 000 / 3 000</b>T3</div>
+        <div class="bar"><div><i style="height:26%"></i></div><b>1 000</b>T4</div>
+      </div>
+      <div class="line" style="border-top:1px solid var(--line)"><div>Écart détecté au T3<small>déclaré 2 000 € · encaissé 3 000 €</small></div><span class="pillx a">à vérifier</span></div>
+    </div>
+  </div>
+  <div class="feat">
+    <div class="copy"><span class="k">Hors TVA, avoirs compris</span><h2>Chaque montant montre d'où il vient.</h2><p>TVA retirée quand vous la facturez, avoir remboursé déduit, achat fournisseur ignoré, virement personnel écarté. Rien n'est additionné sans sa source.</p></div>
+    <div class="frag"><h4>Formateur, redevable TVA</h4>
+      <div class="line"><div>FM-2 · Formation Python<small>3 600 € TTC → 3 000 € HT</small></div><span class="amt">3 000 €</span></div>
+      <div class="line"><div>AV-1 · Avoir remboursé le 20/06<small>1 jour annulé sur FM-2</small></div><span class="amt">−1 000 €</span></div>
+      <div class="line off"><div>CB Papeterie Centrale<small>achat fournisseur, ignoré</small></div><span class="pillx">hors CA</span></div>
+      <div class="line"><div><b>Prestations encaissées 2026</b></div><span class="amt">5 000 €</span></div>
+    </div>
+  </div>
+</div></section>
 
-  <script>
-    /* ── Révélation au scroll : IntersectionObserver (aucun scroll listener) ── */
-    (function () {
-      var els = document.querySelectorAll('[data-reveal]');
-      if (!('IntersectionObserver' in window)) {
-        els.forEach(function (el) { el.classList.add('is-visible'); });
-        return;
-      }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-      els.forEach(function (el) { io.observe(el); });
-    })();
-  </script>
+<section class="center" style="padding-top:0"><div class="wrap">
+  <h2 style="max-width:18ch;margin-inline:auto">Vous ne cherchez plus. <em>On vous montre.</em></h2>
+  <p class="lead" style="margin-top:18px">Chaque point d'attention arrive avec le document et la date qui le justifient. Vous décidez, vous déclarez.</p>
+  <div class="notifs" aria-hidden="true">
+    <div class="notif"><i class="a">!</i><div>Écart URSSAF au T3<small>1 000 € d'écart entre encaissé et déclaré</small></div><span class="t">10:02</span></div>
+    <div class="notif"><i class="g">✓</i><div>TVA retirée sur FM-2<small>3 600 € TTC → 3 000 € HT</small></div><span class="t">10:02</span></div>
+    <div class="notif"><i>→</i><div>V-104 reportée sur 2027<small>encaissée le 12/01/2027</small></div><span class="t">10:01</span></div>
+  </div>
+</div></section>
 
-  <!-- Widget Tally (traite l'iframe data-tally-src). Script externe assumé. -->
-  <script async src="https://tally.so/widgets/embed.js"></script>
+<section id="comparer" class="center"><div class="wrap">
+  <h2 style="max-width:20ch;margin-inline:auto">Seul, avec un logiciel de compta, <em>ou avec IMPIA.</em></h2>
+  <div class="cmp">
+    <div class="col"><h3>Seul, avec l'attestation URSSAF</h3><div class="price">0 €</div><ul><li>Dix minutes si tout est simple</li><li>Aucune vérification des encaissements</li><li>Le choix de la case repose sur vous</li></ul></div>
+    <div class="col"><h3>Logiciel de comptabilité</h3><div class="price">150 à 400 €<small>/ an</small></div><ul><li>Déclaration incluse dans les offres supérieures</li><li>Il faut y migrer facturation ou banque</li><li>Conçu pour la gestion toute l'année</li></ul></div>
+    <div class="col hi"><h3>IMPIA</h3><div class="price">19 €<small>/ an · prix prévu</small></div><ul><li>Vos documents tels qu'ils sont, rien à migrer</li><li>Vérification case par case, sources à l'appui</li><li>Écarts URSSAF et erreurs classiques signalés</li><li>Gratuit pendant la bêta privée</li></ul></div>
+  </div>
+  <p class="src-note">Fourchette relevée sur les tarifs publics des principaux logiciels pour micro-entrepreneurs, octobre 2026. Le prix d'IMPIA sera confirmé après la bêta.</p>
+</div></section>
+
+<section id="faq" class="center" style="padding-top:0"><div class="wrap">
+  <h2>Questions <em>fréquentes</em></h2>
+  <div class="faq">
+    <details><summary>IMPIA donne-t-il des conseils fiscaux ?</summary><p>Non. IMPIA lit vos documents, calcule et signale. Le choix final et la déclaration restent les vôtres, sur impots.gouv.fr. Pour une situation particulière, adressez-vous à un expert-comptable ou à votre service des impôts.</p></details>
+    <details><summary>Mon chiffre d'affaires n'est-il pas déjà pré-rempli par les impôts ?</summary><p>À ce jour, non pour les micro-entrepreneurs : l'administration l'a confirmé en mai 2026. Vous saisissez vous-même vos recettes. Si cela change, IMPIA servira à vérifier le montant pré-rempli.</p></details>
+    <details><summary>Que deviennent mes documents ?</summary><p>Le service est en cours de développement. L'objectif : traitement en Europe avec Mistral AI, suppression des PDF après analyse, aucune revente de données. La politique de confidentialité sera mise à jour avant l'ouverture de la bêta.</p></details>
+    <details><summary>Combien ça coûte ?</summary><p>Rien pendant la bêta privée. Le prix envisagé ensuite est de 19 € par an, sans reconduction automatique. Il sera confirmé avec les premiers utilisateurs.</p></details>
+    <details><summary>Quand puis-je l'utiliser ?</summary><p>La bêta privée ouvre début 2027, avant la campagne de déclaration des revenus 2026 (avril à juin 2027). Les inscrits sont invités en premier.</p></details>
+  </div>
+</div></section>
+
+<section class="cta" id="liste">
+  <div class="sky" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="tag">Bêta privée · début 2027</span>
+    <h2>Déclarez 2026 sans douter d'une case.</h2>
+    <p class="lead" style="color:var(--hero-ink)">Laissez votre email. Les inscrits sont invités en premier, et la bêta est gratuite.</p>
+    <div class="form"><a href="/beta.html" class="btn btn-dark">Rejoindre la bêta</a></div>
+    <p class="fine">Une seule donnée collectée : votre email, pour l'invitation. Désinscription en un message.</p>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="brand"><a href="#top" class="logo"><svg class="wm" role="img" aria-label="impia"><use href="#impia-wm"/></svg></a><p style="margin-top:12px;max-width:34ch">Votre déclaration de micro-entrepreneur, vérifiée case par case. En développement, conçu avec Mistral AI.</p></div>
+  <div><h4>Produit</h4><a href="#methode">Méthode</a><a href="#comparer">Comparer</a><a href="#faq">Questions</a></div>
+  <div><h4>Légal</h4><a href="/mentions-legales.html">Mentions légales</a><a href="/confidentialite.html">Confidentialité</a><span>contact@impia.fr</span></div>
+  <div class="legal"><span>© 2026 IMPIA · En développement</span><span>IMPIA ne constitue pas un conseil fiscal : vous restez responsable de votre déclaration.</span></div>
+</div></footer>
+
+<script>
+(function(){
+  var n=document.getElementById('vlN'),o=document.getElementById('vlO');
+  function set(vl){n.setAttribute('aria-pressed',!vl);o.setAttribute('aria-pressed',vl);
+    document.getElementById('vlCode').textContent=vl?'5TE':'5HQ';
+    document.getElementById('vlLbl').firstChild.textContent=vl?'Recettes BNC au versement libératoire':'Recettes BNC, régime classique';
+    document.getElementById('vlSub').textContent=vl?'Déjà imposées via l’URSSAF : comptées pour le taux, pas taxées deux fois':'Abattement de 34 % appliqué par l’administration';
+    document.getElementById('vlWarn').style.display=vl?'grid':'none';}
+  n.addEventListener('click',function(){set(false)});o.addEventListener('click',function(){set(true)});
+})();
+</script>
 </body>
 </html>
