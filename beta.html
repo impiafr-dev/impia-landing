@@ -61,10 +61,15 @@ form{display:grid;gap:10px;margin-top:26px}
 label{text-align:left;font-size:14px;font-weight:500;color:var(--ink-2)}
 input{height:52px;padding:0 18px;border-radius:14px;border:1px solid var(--line-2);background:var(--paper);font:inherit;color:var(--ink);width:100%}
 input:focus{outline:2px solid var(--violet);outline-offset:1px}
-.btn{height:52px;border-radius:999px;border:0;background:var(--ink);color:var(--on-ink);font:inherit;font-weight:500;font-size:16px;cursor:pointer;transition:transform .15s,background .2s}
-.btn:hover{background:var(--ink-hover)}.btn:active{transform:translateY(1px)}
+.btn{height:52px;border-radius:999px;border:0;background:var(--ink);color:var(--on-ink);font:inherit;font-weight:500;font-size:16px;cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1),background 200ms ease}
+.btn:hover{background:var(--ink-hover)}.btn:active{transform:scale(.97)}
 .fine{margin-top:16px;font-size:13px;color:var(--muted)}
 .done{display:none}
+.done.on{display:block;animation:done-in 360ms cubic-bezier(.23,1,.32,1) both}
+.done.on .joke{animation:done-in 360ms cubic-bezier(.23,1,.32,1) 60ms both}
+.done.on .next{animation:done-in 360ms cubic-bezier(.23,1,.32,1) 120ms both}
+@keyframes done-in{from{opacity:0;transform:scale(.97) translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.done.on,.done.on .joke,.done.on .next{animation:none}}
 .done .big{font-family:var(--display);font-weight:400;font-variation-settings:'opsz' 144,'SOFT' 30;font-size:clamp(34px,5.4vw,48px);line-height:1.05;letter-spacing:-.015em;margin:18px 0 14px;text-wrap:balance}
 .done .joke{font-family:var(--display);font-style:italic;font-variation-settings:'opsz' 72;font-size:21px;color:var(--ink);margin-top:18px}
 .done .next{margin-top:22px;font-size:15px;color:var(--ink-2)}
@@ -126,7 +131,7 @@ footer{text-align:center;font-size:13px;color:var(--ink-2);padding-block:24px}
       ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.globalAlpha=Math.min(1,p.l/30);ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();}
     requestAnimationFrame(tick);}
   function confetti(){var w=innerWidth,h=innerHeight;burst(w*.5,h*.45,140);burst(w*.2,h*.6,70);burst(w*.8,h*.6,70);if(!run){run=true;tick();}}
-  function done(){    document.getElementById('ask').style.display='none';var d=document.getElementById('done');d.style.display='block';    document.getElementById('joke').textContent=jokes[Math.floor(Math.random()*jokes.length)];    if(!matchMedia('(prefers-reduced-motion: reduce)').matches)confetti();}
+  function done(){    document.getElementById('ask').style.display='none';var d=document.getElementById('done');d.classList.add('on');    document.getElementById('joke').textContent=jokes[Math.floor(Math.random()*jokes.length)];    if(!matchMedia('(prefers-reduced-motion: reduce)').matches)confetti();}
   window.addEventListener('message',function(e){var d=e.data;try{if(typeof d==='string')d=JSON.parse(d);}catch(_){return;}if(d&&d.event==='Tally.FormSubmitted')done();});
 })();
 </script>

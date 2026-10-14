@@ -84,7 +84,7 @@
     <div class="frag"><h4>Option versement libératoire</h4>
       <div class="toggle" role="group" aria-label="Versement libératoire"><button type="button" id="vlN" aria-pressed="true">Non</button><button type="button" id="vlO" aria-pressed="false">Oui</button></div>
       <div class="box" style="margin-top:4px"><span class="code" id="vlCode">5HQ</span><div id="vlLbl">Recettes BNC, régime classique<div class="sub" id="vlSub">Abattement de 34 % appliqué par l'administration</div></div><span class="amt">6 140 €</span></div>
-      <div class="line off" id="vlWarn" style="display:none"><div>5HQ laissée vide<small>Sinon vos recettes seraient imposées une seconde fois</small></div><span class="pillx g">évité</span></div>
+      <div class="line off" id="vlWarn" hidden><div>5HQ laissée vide<small>Sinon vos recettes seraient imposées une seconde fois</small></div><span class="pillx g">évité</span></div>
     </div>
   </div>
   <div class="feat">
@@ -162,11 +162,17 @@
 <script>
 (function(){
   var n=document.getElementById('vlN'),o=document.getElementById('vlO');
-  function set(vl){n.setAttribute('aria-pressed',!vl);o.setAttribute('aria-pressed',vl);
-    document.getElementById('vlCode').textContent=vl?'5TE':'5HQ';
-    document.getElementById('vlLbl').firstChild.textContent=vl?'Recettes BNC au versement libératoire':'Recettes BNC, régime classique';
-    document.getElementById('vlSub').textContent=vl?'Déjà imposées via l’URSSAF : comptées pour le taux, pas taxées deux fois':'Abattement de 34 % appliqué par l’administration';
-    document.getElementById('vlWarn').style.display=vl?'grid':'none';}
+  var box=document.getElementById('vlCode').closest('.box'),warn=document.getElementById('vlWarn'),cur=null;
+  warn.hidden=true;warn.style.display='';
+  function set(vl){if(vl===cur)return;cur=vl;n.setAttribute('aria-pressed',!vl);o.setAttribute('aria-pressed',vl);
+    box.classList.add('swapping');
+    setTimeout(function(){
+      document.getElementById('vlCode').textContent=vl?'5TE':'5HQ';
+      document.getElementById('vlLbl').firstChild.textContent=vl?'Recettes BNC au versement libératoire':'Recettes BNC, régime classique';
+      document.getElementById('vlSub').textContent=vl?'Déjà imposées via l’URSSAF : comptées pour le taux, pas taxées deux fois':'Abattement de 34 % appliqué par l’administration';
+      box.classList.remove('swapping');},150);
+    if(vl){warn.classList.add('entering');warn.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){warn.classList.remove('entering');});});}
+    else{warn.hidden=true;}}
   n.addEventListener('click',function(){set(false)});o.addEventListener('click',function(){set(true)});
 })();
 </script>
